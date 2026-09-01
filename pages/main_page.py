@@ -1,52 +1,37 @@
+import allure
+
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
+from urls import MAIN_PAGE_URL
 
 
-class MainPage:
-
-    URL = "https://qa-scooter.praktikum-services.ru/"
-
-    def __init__(self, driver):
-        self.page = BasePage(driver)
-
+class MainPage(BasePage):
+    @allure.step("Открыть главную страницу")
     def open(self):
-        self.page.open(self.URL)
+        super().open(MAIN_PAGE_URL)
 
-    # FAQ
-
+    @allure.step("Открыть ответ FAQ")
     def click_faq_question(self, locator):
-        self.page.scroll_to(locator)
-        self.page.click(locator)
+        self.scroll_to(locator)
+        self.click(locator)
 
+    @allure.step("Получить ответ FAQ")
     def get_faq_answer(self, locator):
-        return self.page.get_text(locator)
+        return self.get_text(locator)
 
-    # Кнопки заказа
-
+    @allure.step("Нажать верхнюю кнопку «Заказать»")
     def click_header_order_button(self):
-        self.page.click(
-            MainPageLocators.HEADER_ORDER_BUTTON
-        )
+        self.click(MainPageLocators.HEADER_ORDER_BUTTON)
 
+    @allure.step("Нажать нижнюю кнопку «Заказать»")
     def click_bottom_order_button(self):
-        self.page.scroll_to(
-            MainPageLocators.BOTTOM_ORDER_BUTTON
-        )
+        self.scroll_to(MainPageLocators.BOTTOM_ORDER_BUTTON)
+        self.click(MainPageLocators.BOTTOM_ORDER_BUTTON)
 
-        self.page.click(
-            MainPageLocators.BOTTOM_ORDER_BUTTON
-        )
-
-    # Логотип Самоката
-
+    @allure.step("Нажать логотип Самоката")
     def click_scooter_logo(self):
-        self.page.click(
-            MainPageLocators.SCOOTER_LOGO
-        )
+        self.click(MainPageLocators.SCOOTER_LOGO)
 
-    # Логотип Яндекса
-
+    @allure.step("Нажать логотип Яндекса")
     def click_yandex_logo(self):
-        self.page.click(
-            MainPageLocators.YANDEX_LOGO
-        )
+        self.click(MainPageLocators.YANDEX_LOGO)
